@@ -42,7 +42,6 @@ CREATE TABLE Accounts
     user_id BIGINT UNSIGNED NOT NULL,
     name VARCHAR(100) DEFAULT NULL,
     description VARCHAR(200) DEFAULT NULL,
-    currency VARCHAR(50) NOT NULL CHECK (currency IN ('RSD','EUR')),
     priority VARCHAR(50) NOT NULL CHECK (priority IN ('HIGH','MEDIUM','LOW')),
     balance DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users (id) ON DELETE CASCADE ON UPDATE CASCADE

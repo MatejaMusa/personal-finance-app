@@ -16,7 +16,6 @@ public class Account {
     private Long userId;
     private String name;
     private String description;
-    private String currency;
     private String priority;
     private float balance;
 }
