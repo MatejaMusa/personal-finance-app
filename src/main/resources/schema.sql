@@ -24,7 +24,7 @@ CREATE TABLE Categories
     id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     type VARCHAR(50) NOT NULL CHECK (type IN ('EXPENSE','INCOME')),
-    CONSTRAINT UQ_Categories_Name UNIQUE (name)
+    CONSTRAINT UQ_Categories_Name_Type UNIQUE (name, type)
 );
 
 CREATE TABLE UserCategories

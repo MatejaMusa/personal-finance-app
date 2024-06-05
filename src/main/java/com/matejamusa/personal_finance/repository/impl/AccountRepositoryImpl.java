@@ -38,4 +38,13 @@ public class AccountRepositoryImpl implements AccountRepository<Account> {
     public List<Account> getAllByUserId(long userId) {
         return jdbc.query(SELECT_ACCOUNTS_BY_USER_ID_QUERY, Map.of("userId", userId), new AccountRowMapper());
     }
+
+    @Override
+    public void updateBalance(long accountId, double amount, String type) {
+        SqlParameterSource params = new MapSqlParameterSource().
+                addValue("accountId", accountId).
+                addValue("amount", amount)
+                .addValue("type", type);
+        jdbc.update(UPDATE_ACCOUNT_BALANCE_QUERY, params);
+    }
 }
