@@ -3,6 +3,7 @@ package com.matejamusa.personal_finance.filter;
 import com.matejamusa.personal_finance.service.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -37,15 +38,31 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
-        final String authHeader = request.getHeader("Authorization");
+//        final String authHeader = request.getHeader("Authorization");
+//
+//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+//            filterChain.doFilter(request, response);
+//            return;
+//        }
+        Cookie[] cookies = request.getCookies();
+        String jwt = null;
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if ("jwt".equals(cookie.getName())) {
+                    jwt = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        if (jwt == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "JWT token is missing");
             return;
         }
 
         try {
-            final String jwt = authHeader.substring(7);
+//            final String jwt = authHeader.substring(7);
             final String username = jwtService.extractUsername(jwt);
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -73,7 +90,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return request.getHeader(AUTHORIZATION) == null || !request.getHeader(AUTHORIZATION).startsWith("Bearer ")
-                || request.getMethod().equalsIgnoreCase("OPTIONS") || asList("/auth/signup", "/auth/login").contains(request.getRequestURI());
+        return request.getMethod().equalsIgnoreCase("OPTIONS") || asList("/auth/signup", "/auth/login").contains(request.getRequestURI());
     }
 }

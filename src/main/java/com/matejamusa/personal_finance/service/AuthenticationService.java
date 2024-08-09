@@ -21,7 +21,7 @@ public class AuthenticationService {
     private final UserRepository<User> userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public User signup(SignupAndLoginForm input) throws ApiException {
+    public User signup(SignupAndLoginForm input) {
         User user = User.builder()
                 .username(input.getUsername())
                 .password(input.getPassword())
@@ -30,7 +30,7 @@ public class AuthenticationService {
         return userRepository.create(user);
     }
 
-    public User authenticate(SignupAndLoginForm input) throws ApiException {
+    public User authenticate(SignupAndLoginForm input) {
         authenticationManager.authenticate(unauthenticated(
                         input.getUsername(),
                         input.getPassword())
