@@ -6,6 +6,8 @@ import com.matejamusa.personal_finance.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -32,8 +34,12 @@ public class CategoryService {
         } else {
             throw new ApiException("Category not found");
         }
-
+        System.out.println(correctedCategory);
         return correctedCategory;
 
+    }
+
+    public List<Category> getAllByUserId(Long id) {
+        return categoryRepository.getAllByUserId(id);
     }
 }
