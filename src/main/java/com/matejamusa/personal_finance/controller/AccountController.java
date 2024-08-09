@@ -1,5 +1,6 @@
 package com.matejamusa.personal_finance.controller;
 
+import com.matejamusa.personal_finance.exception.ApiException;
 import com.matejamusa.personal_finance.model.Account;
 import com.matejamusa.personal_finance.model.User;
 import com.matejamusa.personal_finance.service.AccountService;
@@ -17,8 +18,12 @@ public class AccountController {
     private final AccountService accountService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> getById(@PathVariable Long id) {
+    public ResponseEntity<Account> getById(@PathVariable Long id, Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
         Account account = accountService.getById(id);
+        if (user.getId() != account.getUserId()) {
+            throw new ApiException("You are not owner of this account");
+        }
         return ResponseEntity.ok(account);
     }
 
