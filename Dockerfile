@@ -2,8 +2,10 @@ FROM azul/zulu-openjdk:21.0.1
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
 
-EXPOSE 8080
+COPY src ./src
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["./mvnw", "spring-boot:run"]
