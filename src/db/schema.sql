@@ -94,6 +94,6 @@ INSERT INTO Transactions (account_id, category_id, amount, transaction_date) VAL
                                                                                  (2, 8, 10000.00, '2024-08-15 11:30:00');
 
 INSERT INTO Transactions (account_id, category_id, amount, transaction_date) VALUES
-                                                                                 (3, 2, 4000.00, '2024-08-12 20:00:00');
+                                                                                 (3, 2, 4000.00, '2024-08-12 20:00:00'),
                                                                                  (3, 6, 1000.00, '2024-08-18 15:45:00'),
                                                                                  (3, 1, 2000.00, '2024-08-20 11:00:00');
