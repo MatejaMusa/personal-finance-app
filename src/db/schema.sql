@@ -62,7 +62,7 @@ CREATE TABLE Transactions
     FOREIGN KEY (category_id) REFERENCES Categories (id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
-INSERT INTO Users (username, password) VALUES ('Matejamusa', 'Matejamusa123!');
+INSERT INTO Users (username, password) VALUES ('Matejamusa', '$2b$10$X9oQFSdgqjOLAtA9QCq2OuK3Z0YW2RbJl69Z8ueIGnmjT7.yFwVLi!');
 
 INSERT INTO Categories (name, type) VALUES
                                         ('Namirnice', 'EXPENSE'),
