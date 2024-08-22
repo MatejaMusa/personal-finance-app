@@ -1,4 +1,4 @@
-package com.matejamusa.personal_finance;
+package com.matejamusa.personal_finance.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

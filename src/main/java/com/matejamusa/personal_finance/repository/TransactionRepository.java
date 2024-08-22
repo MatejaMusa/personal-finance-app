@@ -1,6 +1,6 @@
 package com.matejamusa.personal_finance.repository;
 
-import com.matejamusa.personal_finance.GraphType;
+import com.matejamusa.personal_finance.enums.GraphType;
 import com.matejamusa.personal_finance.dto.TransactionDTO;
 import com.matejamusa.personal_finance.model.Category;
 import com.matejamusa.personal_finance.model.GraphPoint;

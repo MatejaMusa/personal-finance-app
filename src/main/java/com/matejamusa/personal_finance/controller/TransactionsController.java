@@ -1,6 +1,6 @@
 package com.matejamusa.personal_finance.controller;
 
-import com.matejamusa.personal_finance.GraphType;
+import com.matejamusa.personal_finance.enums.GraphType;
 import com.matejamusa.personal_finance.dto.TransactionDTO;
 import com.matejamusa.personal_finance.exception.ApiException;
 import com.matejamusa.personal_finance.model.Account;
@@ -59,8 +59,6 @@ public class TransactionsController {
         User user = (User) authentication.getPrincipal();
         Transaction transaction = transactionService.findById(id);
         Account account = accountService.getById(transaction.getAccountId());
-//        if (!Objects.equals(user.getId(), account.getUserId())) {
-//        }
         return ResponseEntity.ok(transaction);
     }
 
