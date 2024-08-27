@@ -23,7 +23,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/transaction")
-public class TransactionsController {
+public class TransactionController {
     private final TransactionService transactionService;
     private final AccountService accountService;
 
